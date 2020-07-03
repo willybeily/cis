@@ -57,7 +57,7 @@ router.get('/', checkLoginUser,function(req, res, next) {
     var loginUser=localStorage.getItem('loginUser');
     getPassCat.exec(function(err,data){
       if(err) throw err;
-    res.render('password_category', { title: 'Confidential Information Storage',loginUser: loginUser,records:data});
+    res.render('password_category', { title: 'Confidential Information Storage',loginUser: loginUser,records:data,email:localStorage.email});
   });
   });
 
@@ -70,6 +70,8 @@ router.get('/', checkLoginUser,function(req, res, next) {
       res.redirect('/passwordCategory');
     });
   });
+
+
   
   router.get('/edit/:id', checkLoginUser,function(req, res, next) {
     var loginUser=localStorage.getItem('loginUser');

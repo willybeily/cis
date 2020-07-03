@@ -69,11 +69,15 @@ router.post('/',checkLoginUser, [ check('passwordCategory','Enter Password Categ
           res.render('addNewCategory', { title: 'Confidential Information Storage',loginUser: loginUser, errors:errors.mapped(),success:'' });
       
         }else{
+          
            var passCatName =req.body.passwordCategory;
+           var email=req.body.emailCategory;
+           console.log(passCatName+" "+email)
            var passcatDetails =new passCatModel({
-            passord_category: passCatName
+            passord_category: passCatName,
+            email:email
            });
-      
+         console.log(passcatDetails.passord_category+" "+passcatDetails.email)
            passcatDetails.save(function(err,doc){
              if(err) throw err;
              res.render('addNewCategory', { title: 'Confidential Information Storage',loginUser: loginUser, errors:'', success:'Password category inserted successfully' });

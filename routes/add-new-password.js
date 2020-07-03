@@ -56,8 +56,11 @@ return res.render('signup', { title: 'Confidential Information Storage', msg:'Em
 
 router.get('/', checkLoginUser,function(req, res, next) {
     var loginUser=localStorage.getItem('loginUser');
+    var email=localStorage.getItem('email')
+    console.log(email+" ehelsjersejrlekjrlkeheybro")
     getPassCat.exec(function(err,data){
   if(err) throw err;
+   
   res.render('add-new-password', { title: 'Confidential Information Storage',loginUser: loginUser,records: data,success:''});
   
     });
@@ -68,12 +71,16 @@ router.get('/', checkLoginUser,function(req, res, next) {
   var pass_cat= req.body.pass_cat;
   var project_name= req.body.project_name;
   var pass_details= req.body.pass_details;
+  var email=req.body.Email_name;
+
   var password_details= new passModel({
     password_category:pass_cat,
+    email:email,
     project_name:project_name,
-    password_detail:pass_details
+    password_detail:pass_details,
+    
   });
-      
+    
     password_details.save(function(err,doc){
       getPassCat.exec(function(err,data){
         if(err) throw err;

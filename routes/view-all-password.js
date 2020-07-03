@@ -9,6 +9,7 @@ const { check, validationResult } = require('express-validator');
 
 var getPassCat= passCatModel.find({});
 var getAllPass= passModel.find({});
+var getemail=userModule.find({});
 /* GET home page. */
 
 function checkLoginUser(req,res,next){
@@ -56,26 +57,27 @@ return res.render('signup', { title: 'Confidential Information Storage', msg:'Em
 
 
 router.get('/',checkLoginUser, function(req, res, next) {
+
+  console.log(req.body.email)
    
     var loginUser=localStorage.getItem('loginUser');
+ 
   
-    var perPage = 3;
-    var page = req.params.page || 1;
-  
-    getAllPass.skip((perPage * page) - perPage)
-    .limit(perPage).exec(function(err,data){
+
+    getAllPass
+   .exec(function(err,data){
   if(err) throw err;
-  passModel.countDocuments({}).exec((err,count)=>{    
+  
   res.render('view-all-password', { title: 'Confidential Information Storage',
   loginUser: loginUser,
   records: data,
-    current: page,
-    pages: Math.ceil(count / perPage) 
+    email:localStorage.getItem('email'),
+  
   });
     });
   });
-  });
-  
+
+
   router.get('/:page',checkLoginUser, function(req, res, next) {
    
     var loginUser=localStorage.getItem('loginUser');
@@ -90,13 +92,15 @@ router.get('/',checkLoginUser, function(req, res, next) {
   res.render('view-all-password', { title: 'Confidential Information Storage',
   loginUser: loginUser,
   records: data,
+  lengths:data.length,
+  email:localStorage.getItem('email'),
     current: page,
     pages: Math.ceil(count / perPage) 
   });
     });
   });
   });
-  
-  
+
+
   
   module.exports = router;

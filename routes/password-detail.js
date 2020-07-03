@@ -57,7 +57,8 @@ return res.render('signup', { title: 'Confidential Information Storage', msg:'Em
 
 
 router.get('/',checkLoginUser, function(req, res, next) {
-    res.redirect('/dashboard');
+ 
+      res.redirect('/dashboard');
   });
   
   router.get('/edit/:id',checkLoginUser, function(req, res, next) {

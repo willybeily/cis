@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://aashu:p%40ssw0rd%279%27%21@cluster0-s9hrn.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useCreateIndex: true,});
+mongoose.connect("mongodb+srv://ashwanikumar:vermakumar@cluster0.i6je3.mongodb.net/testing?retryWrites=true&w=majority", {useNewUrlParser: true, useCreateIndex: true,});
 var conn =mongoose.Collection;
 var userSchema =new mongoose.Schema({
     username: {type:String, 
